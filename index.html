@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sluis: your web app as native iOS and Android apps</title>
+  <meta name="description" content="Sluis uses AI to translate your existing web app into real iOS and Android apps, then takes them through App Store and Google Play review.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#E9ECF1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1B2C" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sluis.si/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sluis">
+  <meta property="og:url" content="https://sluis.si/">
+  <meta property="og:title" content="Sluis: your web app, native">
+  <meta property="og:description" content="AI translates your existing web app into real iOS and Android apps. We take them through store review.">
+  <meta property="og:image" content="https://sluis.si/assets/brand/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Sluis wordmark above the line: Your web app, native.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/assets/brand/sluis-app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/site.css">
+
+  <script>
+    /* Runs before first paint: apply a saved theme and switch on the motion helpers. */
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      try {
+        var saved = localStorage.getItem('sluis-theme');
+        if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+      } catch (e) {}
+    })();
+  </script>
+  <script src="assets/js/site.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Sluis",
+    "url": "https://sluis.si/",
+    "logo": "https://sluis.si/assets/brand/sluis-app-icon.svg",
+    "email": "hello@sluis.si",
+    "description": "Sluis uses AI to translate existing web apps into native iOS and Android apps."
+  }
+  </script>
+</head>
+<body>
+  <!-- Shared drawings: the wordmark, and the small icons used by the header and the example app. -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="logo" viewBox="0 0 421.63 150.1">
+      <path class="logo-water" d="M179.17 84.75H242.47V98.25A31.65 31.65 0 0 1 179.17 98.25Z"/>
+      <path fill="currentColor" d="M47.3 149.9Q27.6 149.9 15.2 141.2Q2.8 132.5 0 116.7L21.4 113.4Q23.4 121.8 30.7 126.7Q37.9 131.5 48.7 131.5Q58.5 131.5 64 127.5Q69.6 123.5 69.6 116.5Q69.6 112.4 67.7 109.9Q65.7 107.3 59.5 105Q53.3 102.7 40.6 99.3Q26.7 95.7 18.5 91.6Q10.4 87.4 7 81.9Q3.5 76.3 3.5 68.4Q3.5 58.6 8.7 51.3Q13.9 44 23.4 40Q32.8 36 45.5 36Q57.9 36 67.6 39.9Q77.3 43.8 83.3 51Q89.3 58.1 90.5 67.7L69.1 71.6Q68 63.8 61.8 59.3Q55.6 54.8 45.7 54.4Q36.2 54 30.3 57.6Q24.4 61.1 24.4 67.3Q24.4 70.9 26.7 73.4Q28.9 75.9 35.4 78.2Q41.9 80.5 54.6 83.7Q68.2 87.2 76.2 91.5Q84.2 95.7 87.7 101.5Q91.1 107.4 91.1 115.7Q91.1 131.7 79.5 140.8Q67.8 149.9 47.3 149.9ZM112.8 147V0H133.8V147ZM287.9 21.3V1H308.8V21.3ZM287.9 147V39H308.8V147ZM377.8 149.9Q358.1 149.9 345.7 141.2Q333.3 132.5 330.5 116.7L351.9 113.4Q353.9 121.8 361.2 126.7Q368.4 131.5 379.2 131.5Q389 131.5 394.6 127.5Q400.1 123.5 400.1 116.5Q400.1 112.4 398.2 109.9Q396.2 107.3 390 105Q383.8 102.7 371.1 99.3Q357.2 95.7 349.1 91.6Q340.9 87.4 337.5 81.9Q334 76.3 334 68.4Q334 58.6 339.2 51.3Q344.4 44 353.9 40Q363.3 36 376 36Q388.4 36 398.1 39.9Q407.8 43.8 413.8 51Q419.8 58.1 421 67.7L399.6 71.6Q398.5 63.8 392.3 59.3Q386.1 54.8 376.2 54.4Q366.7 54 360.8 57.6Q354.9 61.1 354.9 67.3Q354.9 70.9 357.2 73.4Q359.4 75.9 365.9 78.2Q372.4 80.5 385.1 83.7Q398.7 87.2 406.7 91.5Q414.7 95.7 418.2 101.5Q421.6 107.4 421.6 115.7Q421.6 131.7 410 140.8Q398.3 149.9 377.8 149.9ZM159.07 39H180.07V98.25A30.75 30.75 0 0 0 241.57 98.25V39H262.57V98.25A51.75 51.75 0 0 1 159.07 98.25Z"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.6A8.4 8.4 0 0 1 9.4 4a8.4 8.4 0 1 0 10.6 10.6Z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-chev-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chev-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m15 4.5-7.5 7.5 7.5 7.5"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 12H5m6-6-6 6 6 6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3.5 8a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v1.6a2.4 2.4 0 0 0 0 4.8V16a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-1.6a2.4 2.4 0 0 0 0-4.8Z"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.3-3.6 4.2-5.5 7.5-5.5s6.2 1.9 7.5 5.5"/></g></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15Z"/><path d="M10 21a2.2 2.2 0 0 0 4 0" stroke-linecap="round"/></g></symbol>
+    <symbol id="i-faceid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8V6a2.5 2.5 0 0 1 2.5-2.5h2M16 3.5h2A2.5 2.5 0 0 1 20.5 6v2M20.5 16v2a2.5 2.5 0 0 1-2.5 2.5h-2M8 20.5H6A2.5 2.5 0 0 1 3.5 18v-2M8.5 9v1.5M15.5 9v1.5M12 9v4.2h-1M9 16.2c1.8 1.4 4.2 1.4 6 0"/></g></symbol>
+    <symbol id="i-fingerprint" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5.6 8.2A7.5 7.5 0 0 1 19.5 12v1.5M4.5 12v1.2c0 2 .4 3.8 1.2 5.4"/><path d="M8 12a4 4 0 0 1 8 0v1.6c0 2.1.4 4 1.2 5.8M12 12v2c0 2.6.8 5 2.2 7"/><path d="M8 15.2c0 2 .6 3.9 1.6 5.6"/></g></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 10.5 10 5 19 5c0 9-5.6 14-14 14Z"/><path d="m5 19 8.5-8.5"/></g></symbol>
+    <symbol id="i-reload" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12A7.5 7.5 0 1 1 17.3 6.7"/><path d="M19.5 4v4.2h-4.2"/></g></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-lock-small" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5.5" y="10.5" width="13" height="10" rx="2.2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></g></symbol>
+    <symbol id="sb-signal" viewBox="0 0 18 12"><g fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></g></symbol>
+    <symbol id="sb-wifi" viewBox="0 0 16 12"><g fill="currentColor"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2Z"/><path d="M8 5.7c1.5 0 2.9.6 4 1.6l1.2-1.3A7.6 7.6 0 0 0 8 3.9 7.6 7.6 0 0 0 2.8 6l1.2 1.3c1.1-1 2.5-1.6 4-1.6Z"/><path d="M8 9.2c.6 0 1.2.2 1.6.6L8 11.6 6.4 9.8c.4-.4 1-.6 1.6-.6Z"/></g></symbol>
+    <symbol id="sb-battery" viewBox="0 0 27 13"><g fill="none" stroke="currentColor" opacity=".45"><rect x=".5" y=".5" width="23" height="12" rx="3.6"/></g><rect x="2" y="2" width="17" height="9" rx="2.2" fill="currentColor"/><path d="M25 4.5v4c.8-.3 1.4-1.1 1.4-2s-.6-1.7-1.4-2Z" fill="currentColor" opacity=".45"/></symbol>
+    <symbol id="sb-a-wifi" viewBox="0 0 16 13"><path fill="currentColor" d="M8 12.6.2 3.7A11.6 11.6 0 0 1 8 .8a11.6 11.6 0 0 1 7.8 2.9Z"/></symbol>
+    <symbol id="sb-a-signal" viewBox="0 0 14 14"><path fill="currentColor" d="M14 0v14H0Z"/></symbol>
+    <symbol id="sb-a-battery" viewBox="0 0 9 15"><g fill="currentColor"><rect x="2.5" y="0" width="4" height="2" rx=".6"/><rect x="0" y="1.5" width="9" height="13.5" rx="1.8"/></g></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="nav-card">
+      <a class="brand" href="#top" aria-label="Sluis, back to top">
+        <svg class="logo" viewBox="0 0 421.63 150.1" aria-hidden="true"><use href="#logo"/></svg>
+      </a>
+      <nav class="nav-main" aria-label="Main">
+        <ul>
+          <li><a href="#audit">Audit</a></li>
+          <li><a href="#store-ready">Store-Ready</a></li>
+          <li><a href="#native-pro">Native Pro</a></li>
+          <li><a href="#agencies">Agencies</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark theme" title="Switch between light and dark">
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        </button>
+        <a class="button button-small" href="#book">Book an audit</a>
+        <button class="menu-button" type="button" aria-haspopup="dialog" aria-controls="menu" aria-expanded="false">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <dialog class="menu-sheet" id="menu" aria-label="Menu">
+    <div class="menu-sheet-top">
+      <svg class="logo" viewBox="0 0 421.63 150.1" aria-hidden="true"><use href="#logo"/></svg>
+      <button class="menu-close" type="button" aria-label="Close menu"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="menu-links">
+        <li><a href="#audit">Audit</a></li>
+        <li><a href="#store-ready">Store-Ready</a></li>
+        <li><a href="#native-pro">Native Pro</a></li>
+        <li><a href="#agencies">Agencies</a></li>
+      </ul>
+    </nav>
+    <div class="menu-sheet-foot">
+      <a class="button" href="#book">Book an audit</a>
+      <button class="theme-toggle theme-toggle-wide" type="button" data-wide>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <span class="theme-toggle-label">Switch to dark</span>
+      </button>
+    </div>
+  </dialog>
+
+  <main id="main">
+
+    <!-- First screen: what it is, and the translation happening in front of the visitor. -->
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 class="display lines" id="hero-title">
+          <span class="line"><span data-line style="--i:0">Your web app,</span></span>
+          <span class="line"><span data-line style="--i:1">native.</span></span>
+        </h1>
+        <p class="lead hero-lead" data-rise style="--i:3">Sluis uses AI to translate your existing web app into real iOS and Android apps, then takes them through store review.</p>
+        <div class="hero-actions" data-rise style="--i:4">
+          <a class="button button-large" href="#book">Book an audit</a>
+          <a class="text-link" href="#translation">See what changes</a>
+        </div>
+      </div>
+
+      <figure class="hero-demo" data-rise style="--i:2">
+        <fieldset class="segmented" id="hero-switch">
+          <legend class="sr-only">Show the example app as</legend>
+          <label><input type="radio" name="hero-mode" value="web" checked><span>Website</span></label>
+          <label><input type="radio" name="hero-mode" value="ios"><span>iOS app</span></label>
+          <label><input type="radio" name="hero-mode" value="android"><span>Android app</span></label>
+        </fieldset>
+
+        <div class="phone" id="hero-phone">
+          <div class="app" data-ui aria-label="Example app screen" role="img">
+            <div class="app-view" data-nav="web" data-sheet="off" data-signin="password" data-reminder="email" data-platform="ios" data-scheme="light">
+              <div class="sb sb-ios"><span class="sb-time">9:41</span><span class="island"></span><span class="sb-icons"><svg viewBox="0 0 18 12"><use href="#sb-signal"/></svg><svg viewBox="0 0 16 12"><use href="#sb-wifi"/></svg><svg viewBox="0 0 27 13" class="sb-bat"><use href="#sb-battery"/></svg></span></div>
+              <div class="sb sb-android"><span class="sb-time">9:41</span><span class="punch"></span><span class="sb-icons"><svg viewBox="0 0 16 13"><use href="#sb-a-wifi"/></svg><svg viewBox="0 0 14 14"><use href="#sb-a-signal"/></svg><svg viewBox="0 0 9 15"><use href="#sb-a-battery"/></svg></span></div>
+
+              <div class="w-header"><span class="w-brand"><svg class="w-leaf"><use href="#i-leaf"/></svg>Linden</span><span class="w-burger"><svg><use href="#i-menu"/></svg></span></div>
+              <div class="w-intro"><span class="w-h1">Book your next class</span><span class="w-sub">Yoga and pilates in the old town</span></div>
+              <div class="ios-nav"><span class="ios-large">Classes</span><span class="avatar">MK</span></div>
+              <div class="and-bar"><span class="and-title">Classes</span><span class="avatar">MK</span></div>
+
+              <div class="w-select">Tuesday, 14 October<svg><use href="#i-chev-down"/></svg></div>
+              <div class="ios-week" aria-hidden="true"><span><i>M</i>13</span><span class="on"><i>T</i>14</span><span><i>W</i>15</span><span><i>T</i>16</span><span><i>F</i>17</span><span><i>S</i>18</span><span><i>S</i>19</span></div>
+              <div class="and-chips"><span>Mon 13</span><span class="on"><svg><use href="#i-check"/></svg>Tue 14</span><span>Wed 15</span><span>Thu 16</span></div>
+
+              <div class="list-head">Tuesday, 14 October</div>
+              <ul class="classes">
+                <li><span class="c-time">07:00</span><span class="c-main"><b>Morning flow</b><small>Ana, 6 spots left</small></span><span class="c-act">Book</span></li>
+                <li><span class="c-time">08:30</span><span class="c-main"><b>Reformer pilates</b><small>Nika, 4 spots left</small></span><span class="c-act">Book</span></li>
+                <li><span class="c-time">12:15</span><span class="c-main"><b>Strength</b><small>Luka, 9 spots left</small></span><span class="c-act">Book</span></li>
+                <li class="is-full"><span class="c-time">17:30</span><span class="c-main"><b>Vinyasa</b><small>Maja, waiting list</small></span><span class="c-act">Join</span></li>
+                <li><span class="c-time">19:00</span><span class="c-main"><b>Yin and breath</b><small>Tine, 11 spots left</small></span><span class="c-act">Book</span></li>
+              </ul>
+
+              <div class="w-cookie"><span>We use cookies to make this site work and to measure visits.</span><span class="w-cookie-ok">Accept</span></div>
+              <div class="w-safari"><span class="w-url"><span class="w-aa">aA</span><span class="w-host"><svg><use href="#i-lock-small"/></svg>linden.studio</span><svg class="w-reload"><use href="#i-reload"/></svg></span></div>
+
+              <div class="ios-tabs"><span class="on"><svg><use href="#i-calendar"/></svg>Classes</span><span><svg><use href="#i-ticket"/></svg>Bookings</span><span><svg><use href="#i-person"/></svg>Profile</span></div>
+              <div class="and-nav"><span class="on"><i><svg><use href="#i-calendar"/></svg></i>Classes</span><span><i><svg><use href="#i-ticket"/></svg></i>Bookings</span><span><i><svg><use href="#i-person"/></svg></i>Profile</span></div>
+              <span class="home-bar"></span>
+            </div>
+            <div class="water" aria-hidden="true"></div>
+          </div>
+        </div>
+        <figcaption class="small muted demo-caption">Example: Linden, a studio’s class-booking web app, before and after translation.</figcaption>
+      </figure>
+    </section>
+
+    <!-- The name, and the method it describes. -->
+    <section class="intro wrap" aria-label="About the name">
+      <div class="intro-text">
+        <p class="intro-first" data-reveal>Sluis is Dutch for a canal lock. A lock lifts a boat from one water level to the next, and the boat does not change.</p>
+        <p data-reveal style="--i:1">We do the same with your web app. Your backend, accounts, brand and team stay as they are. What changes is the level it runs at: native screens on iPhone and Android, translated from the code you already have.</p>
+        <p data-reveal style="--i:2">AI does the translation, screen by screen, into SwiftUI and Jetpack Compose. Our engineers review every screen, add what only a phone can do and take both apps through review.</p>
+        <p data-reveal style="--i:3"><a class="text-link" href="#audit">See what the audit covers</a></p>
+      </div>
+
+      <figure class="lock" data-reveal style="--i:1">
+        <svg class="lock-svg" viewBox="0 0 720 400" role="img" aria-labelledby="lock-title lock-desc">
+          <title id="lock-title">A canal lock, drawn in section</title>
+          <desc id="lock-desc">A boat enters the lock chamber from the lower canal, the gate closes behind it, water fills the chamber and lifts the boat to the level of the upper canal, and the upper gate opens to let it sail on.</desc>
+          <g class="lock-water">
+            <rect x="0" y="262" width="240" height="90"/>
+            <rect class="lock-chamber-water" x="236" y="152" width="252" height="200"/>
+            <rect x="484" y="152" width="236" height="96"/>
+          </g>
+          <g class="lock-boat" transform="translate(361 144)">
+            <path d="M-62 -2h124l-14 24h-96Z"/>
+            <rect x="-34" y="-26" width="46" height="22" rx="4"/>
+          </g>
+          <path class="lock-stone" d="M0 352H486V248H720V400H0Z"/>
+          <g class="lock-gates">
+            <rect class="lock-gate-low" x="222" y="132" width="28" height="220" rx="4"/>
+            <rect class="lock-gate-high" x="472" y="132" width="28" height="116" rx="4"/>
+          </g>
+          <text class="lock-label" x="18" y="246">Web</text>
+          <text class="lock-label" x="702" y="100" text-anchor="end">iOS and Android</text>
+        </svg>
+      </figure>
+    </section>
+
+    <!-- Why translation, not a wrapper. -->
+    <section class="proof wrap" aria-labelledby="proof-title">
+      <div class="proof-head">
+        <h2 class="head" id="proof-title" data-reveal>Why a wrapper isn’t enough</h2>
+        <blockquote class="proof-quote" data-reveal style="--i:1">
+          <p>“Your app should include features, content, and UI that elevate it beyond a repackaged website.”</p>
+          <footer class="small muted">App Store Review Guidelines, 4.2 Minimum Functionality</footer>
+        </blockquote>
+      </div>
+
+      <div class="compare" role="table" aria-label="A wrapped website, a hand-built app and a Sluis translation, compared">
+        <div class="compare-row compare-cols" role="row">
+          <span class="compare-label" role="columnheader"><span class="sr-only">Compared</span></span>
+          <span role="columnheader">Wrapped website</span>
+          <span role="columnheader">Hand-built native</span>
+          <span role="columnheader" class="is-us">Sluis</span>
+        </div>
+        <div class="compare-row" role="row" data-reveal>
+          <span class="compare-label" role="rowheader">What people install</span>
+          <span role="cell" data-col="Wrapped website">Your website in an app frame</span>
+          <span role="cell" data-col="Hand-built native">A second product, written from scratch</span>
+          <span role="cell" data-col="Sluis" class="is-us">Native apps translated from your web app</span>
+        </div>
+        <div class="compare-row" role="row" data-reveal>
+          <span class="compare-label" role="rowheader">App Store review</span>
+          <span role="cell" data-col="Wrapped website">At risk under guideline 4.2</span>
+          <span role="cell" data-col="Hand-built native">Built to pass</span>
+          <span role="cell" data-col="Sluis" class="is-us">Built to pass, and we handle it</span>
+        </div>
+        <div class="compare-row" role="row" data-reveal>
+          <span class="compare-label" role="rowheader">Face ID, push, widgets</span>
+          <span role="cell" data-col="Wrapped website">Partly, through plugins</span>
+          <span role="cell" data-col="Hand-built native">Yes</span>
+          <span role="cell" data-col="Sluis" class="is-us">Yes</span>
+        </div>
+        <div class="compare-row" role="row" data-reveal>
+          <span class="compare-label" role="rowheader">Time to the stores</span>
+          <span role="cell" data-col="Wrapped website">Days</span>
+          <span role="cell" data-col="Hand-built native">Months</span>
+          <span role="cell" data-col="Sluis" class="is-us">Weeks</span>
+        </div>
+        <div class="compare-row" role="row" data-reveal>
+          <span class="compare-label" role="rowheader">Your team</span>
+          <span role="cell" data-col="Wrapped website">Stays as it is</span>
+          <span role="cell" data-col="Hand-built native">Adds iOS and Android developers</span>
+          <span role="cell" data-col="Sluis" class="is-us">Stays as it is</span>
+        </div>
+        <div class="compare-row" role="row" data-reveal>
+          <span class="compare-label" role="rowheader">When the web app changes</span>
+          <span role="cell" data-col="Wrapped website">Updates with your site</span>
+          <span role="cell" data-col="Hand-built native">Rebuilt by hand, twice</span>
+          <span role="cell" data-col="Sluis" class="is-us">We translate the change</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The translation, one pattern at a time. -->
+    <section class="showcase wrap" id="translation" aria-labelledby="showcase-title">
+      <div class="showcase-head">
+        <h2 class="head" id="showcase-title" data-reveal>Every pattern, translated</h2>
+        <p data-reveal style="--i:1">A web app and a native app solve the same problems with different parts. Switch each part between its web form and the native one Sluis builds.</p>
+      </div>
+
+      <div class="studio" data-ui data-reveal style="--i:2">
+        <div class="studio-stage">
+          <div class="phone" id="studio-phone">
+            <div class="app" aria-label="Example app screen with a booking open" role="img">
+              <div class="app-view" data-nav="native" data-sheet="sheet" data-signin="biometric" data-reminder="push" data-platform="ios" data-scheme="light">
+                <div class="sb sb-ios"><span class="sb-time">9:41</span><span class="island"></span><span class="sb-icons"><svg viewBox="0 0 18 12"><use href="#sb-signal"/></svg><svg viewBox="0 0 16 12"><use href="#sb-wifi"/></svg><svg viewBox="0 0 27 13" class="sb-bat"><use href="#sb-battery"/></svg></span></div>
+                <div class="sb sb-android"><span class="sb-time">9:41</span><span class="punch"></span><span class="sb-icons"><svg viewBox="0 0 16 13"><use href="#sb-a-wifi"/></svg><svg viewBox="0 0 14 14"><use href="#sb-a-signal"/></svg><svg viewBox="0 0 9 15"><use href="#sb-a-battery"/></svg></span></div>
+
+                <div class="w-header"><span class="w-brand"><svg class="w-leaf"><use href="#i-leaf"/></svg>Linden</span><span class="w-burger"><svg><use href="#i-menu"/></svg></span></div>
+                <div class="w-intro"><span class="w-h1">Book your next class</span><span class="w-sub">Yoga and pilates in the old town</span></div>
+                <div class="ios-nav"><span class="ios-large">Classes</span><span class="avatar">MK</span></div>
+                <div class="and-bar"><span class="and-title">Classes</span><span class="avatar">MK</span></div>
+
+                <div class="w-select">Tuesday, 14 October<svg><use href="#i-chev-down"/></svg></div>
+                <div class="ios-week" aria-hidden="true"><span><i>M</i>13</span><span class="on"><i>T</i>14</span><span><i>W</i>15</span><span><i>T</i>16</span><span><i>F</i>17</span><span><i>S</i>18</span><span><i>S</i>19</span></div>
+                <div class="and-chips"><span>Mon 13</span><span class="on"><svg><use href="#i-check"/></svg>Tue 14</span><span>Wed 15</span><span>Thu 16</span></div>
+
+                <div class="list-head">Tuesday, 14 October</div>
+                <ul class="classes">
+                  <li><span class="c-time">07:00</span><span class="c-main"><b>Morning flow</b><small>Ana, 6 spots left</small></span><span class="c-act">Book</span></li>
+                  <li class="is-picked"><span class="c-time">08:30</span><span class="c-main"><b>Reformer pilates</b><small>Nika, 4 spots left</small></span><span class="c-act">Book</span></li>
+                  <li><span class="c-time">12:15</span><span class="c-main"><b>Strength</b><small>Luka, 9 spots left</small></span><span class="c-act">Book</span></li>
+                  <li class="is-full"><span class="c-time">17:30</span><span class="c-main"><b>Vinyasa</b><small>Maja, waiting list</small></span><span class="c-act">Join</span></li>
+                  <li><span class="c-time">19:00</span><span class="c-main"><b>Yin and breath</b><small>Tine, 11 spots left</small></span><span class="c-act">Book</span></li>
+                </ul>
+
+                <div class="w-cookie"><span>We use cookies to make this site work and to measure visits.</span><span class="w-cookie-ok">Accept</span></div>
+                <div class="w-safari"><span class="w-url"><span class="w-aa">aA</span><span class="w-host"><svg><use href="#i-lock-small"/></svg>linden.studio</span><svg class="w-reload"><use href="#i-reload"/></svg></span></div>
+
+                <div class="ios-tabs"><span class="on"><svg><use href="#i-calendar"/></svg>Classes</span><span><svg><use href="#i-ticket"/></svg>Bookings</span><span><svg><use href="#i-person"/></svg>Profile</span></div>
+                <div class="and-nav"><span class="on"><i><svg><use href="#i-calendar"/></svg></i>Classes</span><span><i><svg><use href="#i-ticket"/></svg></i>Bookings</span><span><i><svg><use href="#i-person"/></svg></i>Profile</span></div>
+
+                <!-- The booking, as a web modal or a native sheet. -->
+                <div class="scrim"></div>
+                <div class="sheet">
+                  <span class="grabber"></span>
+                  <span class="sheet-close"><svg><use href="#i-close"/></svg></span>
+                  <b class="sheet-title">Reformer pilates</b>
+                  <span class="sheet-meta">Tuesday, 14 October, 08:30 to 09:20</span>
+                  <span class="sheet-meta">With Nika in studio 2. 4 spots left.</span>
+                  <div class="signin-web">
+                    <span class="w-field">Email<em>mia.kos@example.com</em></span>
+                    <span class="w-field">Password<em>••••••••••</em></span>
+                  </div>
+                  <label class="remind-web"><span class="w-check"></span>Email me a reminder</label>
+                  <span class="sheet-cta signin-web-cta">Sign in and book</span>
+                  <span class="sheet-cta signin-bio-cta"><svg class="bio-ios"><use href="#i-faceid"/></svg><svg class="bio-android"><use href="#i-fingerprint"/></svg><span class="bio-label-ios">Book with Face ID</span><span class="bio-label-android">Book with fingerprint</span></span>
+                </div>
+
+                <!-- The reminder, as a native notification. -->
+                <div class="notif">
+                  <span class="notif-icon"><svg><use href="#i-leaf"/></svg></span>
+                  <span class="notif-body"><b>Linden</b><span>Reformer pilates starts in 30 minutes. Studio 2.</span></span>
+                  <span class="notif-time">now</span>
+                </div>
+                <span class="home-bar"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="studio-controls" id="studio-controls" aria-label="Translation controls">
+          <fieldset class="ctl ctl-seg">
+            <legend class="ctl-text"><span class="ctl-name">Navigation</span><span class="ctl-map">Hamburger menu, or a tab bar and title</span></legend>
+            <span class="mini-seg"><label><input type="radio" name="nav" value="web"><span>Web</span></label><label><input type="radio" name="nav" value="native" checked><span>Native</span></label></span>
+          </fieldset>
+          <fieldset class="ctl ctl-seg">
+            <legend class="ctl-text"><span class="ctl-name">Booking</span><span class="ctl-map">Centred modal, or a sheet from below</span></legend>
+            <span class="mini-seg"><label><input type="radio" name="sheet" value="web"><span>Web</span></label><label><input type="radio" name="sheet" value="native" checked><span>Native</span></label></span>
+          </fieldset>
+          <fieldset class="ctl ctl-seg">
+            <legend class="ctl-text"><span class="ctl-name">Sign-in</span><span class="ctl-map">Email and password, or Face ID</span></legend>
+            <span class="mini-seg"><label><input type="radio" name="signin" value="web"><span>Web</span></label><label><input type="radio" name="signin" value="native" checked><span>Native</span></label></span>
+          </fieldset>
+          <fieldset class="ctl ctl-seg">
+            <legend class="ctl-text"><span class="ctl-name">Reminders</span><span class="ctl-map">An email, or a push notification</span></legend>
+            <span class="mini-seg"><label><input type="radio" name="reminder" value="web"><span>Web</span></label><label><input type="radio" name="reminder" value="native" checked><span>Native</span></label></span>
+          </fieldset>
+          <div class="ctl ctl-range">
+            <span class="ctl-text"><label class="ctl-name" for="ctl-size">Text size</label><span class="ctl-map">Follows the phone’s setting</span></span>
+            <input type="range" id="ctl-size" name="size" min="0.85" max="1.3" step="0.05" value="1">
+          </div>
+          <fieldset class="ctl ctl-seg">
+            <legend class="ctl-name">Appearance</legend>
+            <span class="mini-seg"><label><input type="radio" name="scheme" value="light" checked><span>Light</span></label><label><input type="radio" name="scheme" value="dark"><span>Dark</span></label></span>
+          </fieldset>
+          <fieldset class="ctl ctl-seg">
+            <legend class="ctl-name">Platform</legend>
+            <span class="mini-seg"><label><input type="radio" name="platform" value="ios" checked><span>iOS</span></label><label><input type="radio" name="platform" value="android"><span>Android</span></label></span>
+          </fieldset>
+        </form>
+      </div>
+      <p class="small muted studio-note" data-reveal>Every switch is a decision the audit makes with you, screen by screen.</p>
+    </section>
+
+    <!-- How to start. -->
+    <section class="audit wrap" id="audit" aria-labelledby="audit-title">
+      <div class="audit-head">
+        <h2 class="head" id="audit-title" data-reveal>Start with an audit</h2>
+        <p class="lead" data-reveal style="--i:1">In five working days you know what your web app becomes on a phone, what the stores will ask for, and what it costs.</p>
+      </div>
+
+      <div class="audit-board">
+        <div class="audit-notes audit-notes-left">
+          <div class="note" data-reveal><h3>Every screen, mapped</h3><p>We run your web app through our translator and list every screen: what translates directly, what needs a native pattern, what needs your decision.</p></div>
+          <div class="note" data-reveal style="--i:1"><h3>Store rules, by number</h3><p>We check your app against Apple’s and Google’s review rules and name each one that applies, with the fix.</p></div>
+        </div>
+
+        <article class="report" data-ui data-reveal style="--i:1" aria-label="Example audit report for Linden">
+          <header class="report-top">
+            <svg class="report-mark" viewBox="0 0 421.63 150.1" aria-hidden="true"><use href="#logo"/></svg>
+            <span>Native audit</span>
+          </header>
+          <div class="report-title"><b>Linden</b><span>linden.studio, 6 October 2026</span></div>
+
+          <div class="report-block">
+            <div class="report-row report-total"><span>Screens found</span><b>38</b></div>
+            <div class="report-bar" aria-hidden="true"><i style="--w:31"></i><i style="--w:6"></i><i style="--w:1"></i></div>
+            <div class="report-row"><span><i class="key key-1"></i>Translate directly</span><b>31</b></div>
+            <div class="report-row"><span><i class="key key-2"></i>Need a native pattern</span><b>6</b></div>
+            <div class="report-row"><span><i class="key key-3"></i>Need your decision</span><b>1</b></div>
+          </div>
+
+          <div class="report-block">
+            <span class="report-label">Store review</span>
+            <div class="report-rule"><b>4.2</b><span>Minimum functionality<em class="ok">Passes once translated</em></span></div>
+            <div class="report-rule"><b>5.1.1(v)</b><span>Account deletion<em class="todo">Add “Delete account” to Profile</em></span></div>
+            <div class="report-rule"><b>3.1.3(e)</b><span>Services used in person<em class="ok">Keep your card checkout</em></span></div>
+          </div>
+
+          <div class="report-block">
+            <span class="report-label">Worth adding</span>
+            <div class="report-row"><span>Push reminders before class</span><em>Small</em></div>
+            <div class="report-row"><span>Face ID and fingerprint sign-in</span><em>Small</em></div>
+            <div class="report-row"><span>Next-class widget</span><em>Medium</em></div>
+          </div>
+
+          <footer class="report-estimate">
+            <span>Estimate</span>
+            <b>Store-Ready, 5 weeks, €7,400 fixed</b>
+          </footer>
+        </article>
+
+        <div class="audit-notes audit-notes-right">
+          <div class="note" data-reveal style="--i:2"><h3>What a phone adds</h3><p>Push, Face ID, widgets and offline use, ranked by how much they help your users and how long they take.</p></div>
+          <div class="note" data-reveal style="--i:3"><h3>A fixed price and a date</h3><p>The audit ends with a quote you can hold us to. The report is yours to keep, whoever builds the apps.</p></div>
+        </div>
+      </div>
+
+      <div class="audit-cta" data-reveal>
+        <p><b>€490</b>, credited in full when you build with us.</p>
+        <a class="button button-large" href="#book">Book an audit</a>
+      </div>
+    </section>
+
+    <!-- What it costs. -->
+    <section class="pricing wrap" id="pricing" aria-labelledby="pricing-title">
+      <h2 class="head" id="pricing-title" data-reveal>Pricing</h2>
+      <p class="pricing-intro" data-reveal style="--i:1">Both plans start with an audit and end with your apps live in the App Store and Google Play. Prices are fixed in the audit.</p>
+
+      <div class="plans" data-reveal style="--i:2">
+        <table class="plans-table">
+          <caption class="sr-only">Store-Ready and Native Pro compared</caption>
+          <colgroup><col class="col-label"><col class="col-plan col-featured"><col class="col-plan"></colgroup>
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col" id="store-ready" class="is-featured"><span class="plan-name">Store-Ready</span><span class="plan-price">from €6,900</span><span class="plan-period">once, per app pair</span></th>
+              <th scope="col" id="native-pro"><span class="plan-name">Native Pro</span><span class="plan-price">from €14,900</span><span class="plan-period">then €900 a month</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">For</th><td class="is-featured" data-plan="Store-Ready">Getting your web app into both stores as real native apps</td><td data-plan="Native Pro">Apps that should do what only a phone can</td></tr>
+            <tr><th scope="row">Time to the stores</th><td class="is-featured" data-plan="Store-Ready">4 to 6 weeks</td><td data-plan="Native Pro">8 to 12 weeks</td></tr>
+            <tr><th scope="row">Screens</th><td class="is-featured" data-plan="Store-Ready">Every screen of your web app</td><td data-plan="Native Pro">Every screen, plus screens only the apps have</td></tr>
+            <tr><th scope="row">Sign-in</th><td class="is-featured" data-plan="Store-Ready">Face ID, fingerprint and passkeys</td><td data-plan="Native Pro">Face ID, fingerprint and passkeys</td></tr>
+            <tr><th scope="row">Notifications</th><td class="is-featured" data-plan="Store-Ready">Push reminders and updates</td><td data-plan="Native Pro">Rich push, with actions and images</td></tr>
+            <tr><th scope="row">Offline</th><td class="is-featured" data-plan="Store-Ready">Recent screens stay readable</td><td data-plan="Native Pro">Full offline use, synced when back online</td></tr>
+            <tr><th scope="row">Home and Lock Screen</th><td class="is-featured" data-plan="Store-Ready">App icon and launch screen</td><td data-plan="Native Pro">Widgets and Live Activities</td></tr>
+            <tr><th scope="row">Store listing and review</th><td class="is-featured" data-plan="Store-Ready">Written, designed, submitted and seen through to approval</td><td data-plan="Native Pro">Written, designed, submitted and seen through to approval</td></tr>
+            <tr><th scope="row">After launch</th><td class="is-featured" data-plan="Store-Ready">30 days of fixes</td><td data-plan="Native Pro">Monthly releases that follow your web app</td></tr>
+            <tr><th scope="row">Code</th><td class="is-featured" data-plan="Store-Ready">Yours, in Swift and Kotlin repositories</td><td data-plan="Native Pro">Yours, in Swift and Kotlin repositories</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td></td><td class="is-featured"><a class="button button-on-accent" href="#book">Book an audit</a></td><td><a class="button" href="#book">Book an audit</a></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- For agencies: the one inverted chapter. -->
+    <section class="agencies" id="agencies" aria-labelledby="agencies-title">
+      <div class="wrap agencies-inner">
+        <div class="agencies-head">
+          <h2 class="display agencies-title" id="agencies-title" data-reveal>For agencies</h2>
+          <p class="lead" data-reveal style="--i:1">You build the web app. We make it native, under your name.</p>
+          <figure class="whitelabel" data-ui data-reveal style="--i:2" aria-label="An audit cover carrying the agency’s name, with no Sluis branding">
+            <div class="wl-top"><span class="wl-mark">YA</span><span>Your Agency</span></div>
+            <b class="wl-title">Native audit for Linden</b>
+            <span class="wl-meta">Prepared by Your Agency, 6 October 2026</span>
+            <div class="wl-stats"><span><b>38</b>screens</span><span><b>31</b>translate directly</span><span><b>5 weeks</b>to the stores</span></div>
+          </figure>
+        </div>
+        <ul class="terms">
+          <li data-reveal><h3>Your name on the work</h3><p>We work white-label and under NDA. Your client meets your team, not ours.</p></li>
+          <li data-reveal><h3>Partner pricing</h3><p>20% below list on Store-Ready and Native Pro, so the margin on top is yours.</p></li>
+          <li data-reveal><h3>Audits for your pitches</h3><p>Send us a prospect’s web app and get an audit back in three working days, ready for your proposal.</p></li>
+          <li data-reveal><h3>Inside your process</h3><p>We work in your repositories, your Slack and your client’s developer accounts.</p></li>
+          <li data-reveal><h3>Code your client owns</h3><p>Swift and Kotlin repositories, documented and handed over at release.</p></li>
+        </ul>
+        <p class="agencies-cta" data-reveal><a class="text-link" href="mailto:partners@sluis.si?subject=Agency%20partnership">Write to partners@sluis.si</a></p>
+      </div>
+    </section>
+
+    <!-- Questions: the list on the left, one answer at a time on the right. -->
+    <section class="faq wrap" aria-labelledby="faq-title">
+      <div class="faq-list">
+        <h2 class="faq-title" id="faq-title">Questions</h2>
+        <div class="faq-items" id="faq-items">
+          <details class="qa" name="faq" open>
+            <summary>Do we have to change our web app?</summary>
+            <div class="qa-answer"><p>No. Your web app keeps running as it is. The native apps use the same backend and APIs, so accounts and data are shared from the first day.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary>What does the AI do, and what do people do?</summary>
+            <div class="qa-answer"><p>The AI translates each screen and component into SwiftUI and Jetpack Compose. Engineers review every screen, build the native features and test on real devices before anything reaches a store.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary>Which web stacks can you translate?</summary>
+            <div class="qa-answer"><p>Most modern ones: React, Next.js, Vue, Nuxt, Angular, Svelte and server-rendered apps. The audit tells you exactly how much of yours translates directly.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary>Who owns the code?</summary>
+            <div class="qa-answer"><p>You do. You get both repositories, and the apps are published under your own Apple and Google developer accounts.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary>Will Apple and Google approve the apps?</summary>
+            <div class="qa-answer"><p>Nobody can promise an approval, but translated apps are native apps, not repackaged websites. We prepare the listing, submit the build and answer reviewers until it is approved.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary>What happens when our web app changes?</summary>
+            <div class="qa-answer"><p>Store-Ready includes 30 days of fixes after launch. With Native Pro we translate your web changes every month and ship them through review.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary>How long does it take?</summary>
+            <div class="qa-answer"><p>The audit takes five working days. Store-Ready apps usually reach the stores in 4 to 6 weeks, Native Pro apps in 8 to 12.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary>What about payments?</summary>
+            <div class="qa-answer"><p>Physical goods and services, like a class or a delivery, keep your own checkout. Digital goods sold inside an app go through Apple’s and Google’s billing. The audit tells you which rules apply to you.</p></div>
+          </details>
+        </div>
+      </div>
+      <div class="faq-pane" aria-hidden="true"><p class="faq-pane-text"></p></div>
+    </section>
+
+    <!-- The close: the one thing to do next. -->
+    <section class="book wrap" id="book" aria-labelledby="book-title">
+      <div class="book-copy">
+        <h2 class="display book-title" id="book-title" data-reveal>Send us your web app</h2>
+        <p class="lead" data-reveal style="--i:1">We reply within one working day. The audit takes five, costs €490 and is credited to your build.</p>
+        <p class="book-mail" data-reveal style="--i:2">Prefer to write? <a class="text-link" href="mailto:hello@sluis.si?subject=Audit%20request">hello@sluis.si</a></p>
+      </div>
+      <form class="book-form" id="book-form" action="mailto:hello@sluis.si?subject=Audit%20request" method="post" enctype="text/plain" data-reveal style="--i:1">
+        <label class="field-label" for="f-url">Your web app’s address</label>
+        <input class="field" id="f-url" name="Web app" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="app.example.com" required>
+        <label class="field-label" for="f-email">Your email</label>
+        <input class="field" id="f-email" name="Email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label class="field-label" for="f-note">Anything we should know <span class="muted">(optional)</span></label>
+        <textarea class="field" id="f-note" name="Notes" rows="3" placeholder="Launch date, features you need, who your users are"></textarea>
+        <button class="button button-large" type="submit">Book an audit</button>
+        <p class="small muted form-note">This opens an email to hello@sluis.si with your answers filled in.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <span>Native apps from web apps</span>
+    <ul class="footer-links">
+      <li><a href="#audit">Audit</a></li>
+      <li><a href="#store-ready">Store-Ready</a></li>
+      <li><a href="#native-pro">Native Pro</a></li>
+      <li><a href="#agencies">Agencies</a></li>
+    </ul>
+    <span class="footer-end">© 2026 Sluis. <a href="mailto:hello@sluis.si">hello@sluis.si</a></span>
+  </footer>
+</body>
+</html>
