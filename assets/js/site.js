@@ -109,6 +109,25 @@
   let heroTouched = false;
   let running = null;
 
+  // Plons waves at the website and cheers once the app has risen to native.
+  const heroPlons = $('.hero-plons');
+  let moodTimer = 0;
+
+  function setMood(mode, delay) {
+    if (!heroPlons) return;
+    clearTimeout(moodTimer);
+    const mood = mode === 'web' ? 'hoi' : 'cheer';
+    moodTimer = setTimeout(() => {
+      if (heroPlons.dataset.mood === mood) return;
+      heroPlons.dataset.mood = mood;
+      if (reduceMotion.matches) return;
+      $('.plons', heroPlons).animate(
+        [{ transform: 'none' }, { transform: 'translateY(-16px)', offset: 0.35 }, { transform: 'scale(1.06, 0.94)', offset: 0.7 }, { transform: 'none' }],
+        { duration: 560, easing: 'ease-out' }
+      );
+    }, delay);
+  }
+
   const modeOf = (view) => (view.dataset.nav === 'web' ? 'web' : view.dataset.platform);
 
   function applyMode(view, mode) {
@@ -133,6 +152,7 @@
 
     const changesLevel = (from === 'web') !== (mode === 'web');
     const animations = [];
+    setMood(mode, changesLevel && !reduceMotion.matches ? 650 : 0); // as the water reaches the top
 
     if (reduceMotion.matches) {
       animations.push(ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 240, easing: 'ease', fill: 'forwards' }));
@@ -278,6 +298,27 @@
     }, 2500));
   } else {
     revealables.forEach((el) => el.classList.add('is-in'));
+  }
+
+  /* ---------- Plons waves once the close comes into view, and again on hover ---------- */
+
+  const waveArm = $('.book-plons .plons-wave');
+  if (waveArm && !reduceMotion.matches && 'IntersectionObserver' in window) {
+    const wave = () => {
+      if (waveArm.getAnimations().length) return;
+      waveArm.animate(
+        [{ transform: 'none' }, { transform: 'rotate(-16deg)' }, { transform: 'rotate(6deg)' }, { transform: 'rotate(-16deg)' }, { transform: 'rotate(6deg)' }, { transform: 'none' }],
+        { duration: 1700, easing: 'ease-in-out' }
+      );
+    };
+    const plons = waveArm.ownerSVGElement;
+    const seen = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      seen.disconnect();
+      setTimeout(wave, 700); // after the drawing has risen in
+    }, { threshold: 0.6 });
+    seen.observe(plons);
+    plons.addEventListener('pointerenter', wave);
   }
 
   /* ---------- questions: on a wide screen, one large answer beside the list ---------- */

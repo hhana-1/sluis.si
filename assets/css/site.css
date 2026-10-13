@@ -51,6 +51,11 @@
   --boat: #0E1B2C;
   --field-line: rgba(14, 27, 44, 0.16);
   --float-shadow: 0 1px 2px rgba(14, 27, 44, 0.06), 0 14px 36px -10px rgba(14, 27, 44, 0.22);
+  --plons-puddle: #D8E6FF;  /* Plons, the mascot: the parts of the drawing that follow the theme */
+  --plons-ripple: #B7CFFF;
+  --plons-stone: #0E1B2C;
+  --plons-badge: #0E1B2C;
+  --plons-badge-mark: #FFFFFF;
 
   --font: "Manrope", "Manrope Fallback", ui-sans-serif, system-ui, sans-serif;
 
@@ -97,6 +102,11 @@
     --boat: #F3F5F9;
     --field-line: rgba(243, 245, 249, 0.16);
     --float-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+    --plons-puddle: #1D375C;
+    --plons-ripple: #3A5F98;
+    --plons-stone: #34507A;
+    --plons-badge: #F3F5F9;
+    --plons-badge-mark: #0E1B2C;
   }
 }
 :root[data-theme="dark"] {
@@ -119,6 +129,11 @@
   --boat: #F3F5F9;
   --field-line: rgba(243, 245, 249, 0.16);
   --float-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+  --plons-puddle: #1D375C;
+  --plons-ripple: #3A5F98;
+  --plons-stone: #34507A;
+  --plons-badge: #F3F5F9;
+  --plons-badge-mark: #0E1B2C;
 }
 
 /* ---------- base ---------- */
@@ -357,6 +372,38 @@ p { text-wrap: pretty; }
 .hero h1 { max-width: 9.5em; margin-left: -0.04em; }
 .hero-lead { max-width: 31ch; margin-top: clamp(24px, 3vw, 36px); }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: clamp(28px, 3vw, 40px); }
+/* Plons introduces itself, waving; when the example app rises to native, it cheers */
+.hero-plons { display: flex; align-items: center; margin-top: clamp(24px, 3vw, 40px); }
+.hero-plons .plons {
+  --plons-size: clamp(108px, 9vw, 136px);
+  margin: calc(var(--plons-size) * -0.2) 0 0 calc(var(--plons-size) * -0.1); /* the drawing's empty top and left */
+  transform-origin: 50% 84%; /* where it stands, for the hop */
+}
+.hero-plons:not([data-mood="cheer"]) .plons-pose-cheer,
+.hero-plons[data-mood="cheer"] .plons-pose-hoi { display: none; }
+.hero-plons-says {
+  position: relative;
+  max-width: 31ch;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--link);
+  font-size: var(--step-small);
+  line-height: 1.45;
+}
+.hero-plons-says b { color: var(--ink); font-weight: 700; }
+.hero-plons-says::before { /* the bubble's tail, toward Plons */
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  border-radius: 2px;
+  background: inherit;
+  transform: rotate(45deg);
+}
 .hero-demo { grid-column: 8 / span 5; display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .demo-caption { max-width: 34ch; text-align: center; }
 
@@ -822,6 +869,57 @@ p { text-wrap: pretty; }
 .audit-cta p { font-size: var(--step-lead); font-weight: 500; letter-spacing: -0.012em; }
 .audit-cta b { font-weight: 700; }
 
+/* ---------- Plons, the mascot: drawn as exported, with the theme-dependent parts on tokens ---------- */
+.plons { width: var(--plons-size, 196px); height: auto; aspect-ratio: 1; flex: none; overflow: visible; }
+.plons-puddle { fill: var(--plons-puddle); }
+.plons-ripple { stroke: var(--plons-ripple); }
+.plons-stone { fill: var(--plons-stone); }
+.plons-badge { fill: var(--plons-badge); }
+.plons-badge-mark { stroke: var(--plons-badge-mark); }
+.plons-wave { transform-box: view-box; transform-origin: 292px 242px; } /* the shoulder */
+
+/* ---------- updates: Plons reports on the build, as in the product ---------- */
+.updates {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+  padding-bottom: var(--section);
+}
+.updates-head { grid-column: 1 / span 4; position: sticky; top: calc(var(--header-h) + 64px); }
+.updates-head p { margin-top: 24px; max-width: 34ch; }
+.updates-feed { grid-column: 6 / span 7; display: grid; gap: var(--gutter); }
+.updates-note { margin-top: calc(16px - var(--gutter)); }
+.update {
+  --plons-size: clamp(132px, 11vw, 176px);
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 28px);
+  padding: clamp(24px, 2.8vw, 40px) clamp(24px, 3vw, 44px);
+  border-radius: 24px;
+  background: var(--surface);
+}
+.update .plons { margin-left: calc(var(--plons-size) * -0.07); }
+.update-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; container-type: inline-size; }
+.update h3 { font-size: clamp(1.5rem, 1.2rem + 0.75vw, 2rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; }
+.update p { font-size: var(--step-body); line-height: 1.5; font-weight: 500; color: var(--link); max-width: 44ch; }
+.update-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 4px; }
+.update-steps li { display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--muted); }
+.update-steps [aria-current] { color: var(--ink); font-weight: 800; }
+.step-bar { display: block; height: 10px; border-radius: 5px; background: color-mix(in srgb, var(--water) 16%, var(--surface)); overflow: hidden; }
+.step-bar i { display: block; width: calc(var(--fill, 0) * 100%); height: 100%; border-radius: 5px; background: var(--water); }
+/* too narrow for five names: show the current one, keep the rest for screen readers */
+@container (max-width: 400px) {
+  .update-steps .step-name { white-space: nowrap; }
+  .update-steps li:not([aria-current]) .step-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+}
+.update-stores { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+.update-stores li { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: color-mix(in srgb, var(--water) 10%, var(--surface)); font-size: 15px; font-weight: 700; line-height: 1.2; }
+.update-stores .icon { width: 18px; height: 18px; color: var(--water); }
+/* the product's buttons, shown but not pressable here */
+.update-action { align-self: flex-start; margin-top: 4px; padding: 14px 22px; border-radius: 12px; background: var(--water); color: var(--water-ink); font-size: 16px; font-weight: 700; line-height: 1.2; }
+.update-action-quiet { background: color-mix(in srgb, var(--water) 10%, var(--surface)); color: var(--ink); }
+
 /* ---------- pricing ---------- */
 .pricing { padding-bottom: var(--section); }
 .pricing h2 { max-width: 10ch; }
@@ -926,12 +1024,33 @@ p { text-wrap: pretty; }
 @media (min-width: 861px) {
   .js .faq.is-indexed .qa-answer { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; padding: 0; }
   .js .faq.is-indexed .faq-pane {
-    display: block;
+    --plons-size: clamp(128px, 11vw, 176px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     grid-column: 7 / span 6;
     position: sticky;
     top: calc(var(--header-h) + 72px);
-    min-height: 12em;
-    padding-top: calc(var(--step-body) * 1.55 + 18px);
+  }
+  /* Plons, holding out the lifebuoy, says the answer; the drawing's empty top is pulled up level with "Questions" */
+  .faq-plons { margin-top: calc(var(--plons-size) * -0.36); }
+  .faq-bubble {
+    position: relative;
+    margin-top: calc(var(--plons-size) * -0.04);
+    padding: clamp(20px, 2.2vw, 30px) clamp(22px, 2.6vw, 34px);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .faq-bubble::before { /* the bubble's tail, up to Plons */
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: calc(var(--plons-size) * 0.445 - 7px); /* under the middle of Plons's body */
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    background: inherit;
+    transform: rotate(45deg);
   }
   .faq-pane-text { font-size: var(--step-lead); line-height: 1.38; font-weight: 500; letter-spacing: -0.012em; max-width: 30ch; }
   .faq-pane-text.is-changing { opacity: 0; }
@@ -950,6 +1069,7 @@ p { text-wrap: pretty; }
 .book-title { max-width: 12ch; margin-left: -0.04em; }
 .book-copy .lead { margin-top: 28px; max-width: 26ch; }
 .book-mail { margin-top: 28px; color: var(--muted); }
+.book-plons { --plons-size: clamp(144px, 14vw, 216px); margin: clamp(4px, 1vw, 16px) 0 0 calc(var(--plons-size) * -0.1); }
 .book-form {
   grid-column: 8 / span 5;
   display: grid;
@@ -1003,6 +1123,9 @@ textarea.field { resize: vertical; min-height: 96px; line-height: 1.45; }
   .js .compare-row[data-reveal] { transform: translateY(12px); }
   .js .terms [data-reveal] { transform: translateX(-16px); }
   .js .terms [data-reveal].is-in { transform: none; }
+  /* the progress fills, step by step, once the update is in view */
+  .js .update[data-reveal] .step-bar i { width: 0; transition: width 900ms var(--ease-in-out); transition-delay: calc(var(--n, 0) * 260ms + 500ms); }
+  .js .update[data-reveal].is-in .step-bar i { width: calc(var(--fill, 0) * 100%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal] { transition: opacity 400ms ease; }
@@ -1026,6 +1149,7 @@ textarea.field { resize: vertical; min-height: 96px; line-height: 1.45; }
   .audit-notes-right { grid-column: 10 / span 3; }
   .proof-head h2, .showcase-head h2 { grid-column: 1 / span 7; }
   .proof-quote, .showcase-head p { grid-column: 8 / span 5; }
+  .updates-feed { grid-column: 5 / span 8; }
 }
 
 @media (max-width: 860px) {
@@ -1033,11 +1157,18 @@ textarea.field { resize: vertical; min-height: 96px; line-height: 1.45; }
   .hero { padding-top: 36px; row-gap: 48px; }
   .hero-copy, .hero-demo { grid-column: 1 / -1; }
   .hero-copy { padding-top: 0; }
-  .hero-lead { max-width: 30ch; }
+
+  /* one column: every block takes the full width, so nothing hugs the left with an empty strip on the right */
+  .hero h1, .hero-lead, .intro-text p, .proof-head h2, .showcase-head h2, .showcase-head p,
+  .audit-head h2, .audit-head p, .note p, .updates-head p, .update p, .pricing h2, .pricing-intro,
+  .agencies-title, .agencies-head .lead, .whitelabel, .terms p, .qa-answer p, .book-title, .book-copy .lead { max-width: none; }
+  .intro-first { max-width: none !important; }
+  .hero-actions { justify-content: center; gap: 16px 24px; }
+  .hero-actions .button { flex: 1; }
   .demo-caption { max-width: 40ch; }
 
   .intro { row-gap: 48px; }
-  .intro-text { grid-column: 1 / span 10; }
+  .intro-text { grid-column: 1 / -1; }
   .lock { grid-column: 1 / -1; }
 
   .proof-head, .showcase-head, .audit-head { row-gap: 28px; }
@@ -1064,9 +1195,13 @@ textarea.field { resize: vertical; min-height: 96px; line-height: 1.45; }
   .audit-notes-left { order: 1; }
   .report { order: 2; }
   .audit-notes-right { order: 3; }
-  .audit-cta { justify-content: flex-start; text-align: left; }
+  .audit-cta { flex-direction: column; align-items: stretch; gap: 20px; }
 
-  .plans-table, .plans-table tbody, .plans-table tr, .plans-table th, .plans-table td, .plans-table tfoot { display: block; width: auto; }
+  .updates { row-gap: 40px; }
+  .updates-head { grid-column: 1 / -1; position: static; }
+  .updates-feed { grid-column: 1 / -1; }
+
+  .plans-table, .plans-table thead, .plans-table tbody, .plans-table tr, .plans-table th, .plans-table td, .plans-table tfoot { display: block; width: auto; }
   .plans-table colgroup { display: none; }
   .plans-table thead tr { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .plans-table thead td { display: none; }
@@ -1093,11 +1228,13 @@ textarea.field { resize: vertical; min-height: 96px; line-height: 1.45; }
   .agencies-head { position: static; grid-column: 1 / -1; }
   .terms, .agencies-cta { grid-column: 1 / -1; }
   .terms { margin-top: 48px; }
+  .wl-stats { justify-content: space-between; }
 
   .faq-list { grid-column: 1 / -1; }
 
   .book { row-gap: 40px; }
   .book-copy, .book-form { grid-column: 1 / -1; }
+  .book-plons { --plons-size: 128px; margin: -8px auto 0; }
 
   .site-footer { grid-template-columns: 1fr; gap: 8px; padding-bottom: 24px; }
   .footer-links { flex-wrap: wrap; gap: 8px 20px; }
@@ -1109,7 +1246,10 @@ textarea.field { resize: vertical; min-height: 96px; line-height: 1.45; }
   .segmented { width: 100%; }
   .segmented label { flex: 1; }
   .segmented span { padding: 10px 8px; text-align: center; }
-  .intro-text { grid-column: 1 / span 11; }
   .audit-notes { grid-template-columns: 1fr; }
   .compare-row > [data-col] { grid-template-columns: 8.5em 1fr; }
+  /* on a phone the update stacks, as in the product: Plons above the words */
+  .update { --plons-size: 128px; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .update .plons { margin-top: calc(var(--plons-size) * -0.2); } /* the drawing's empty top, minus room for sparkles */
+  .update-body { align-self: stretch; }
 }
